@@ -1,0 +1,463 @@
+<% layout("/layout/boilerplate") -%>
+
+<style>
+body {
+    background: #fff7ed;
+}
+
+/* ---------- HERO SECTION ---------- */
+.hero {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.hero h1 span {
+    color: #936b9c;
+}
+
+.hero p {
+    color: #666;
+    margin-top: 10px;
+}
+
+/* ---------- SEARCH BAR ---------- */
+.search-box {
+    margin: 2rem auto;
+    max-width: 800px;
+    display: flex;
+    background: white;
+    padding: 10px;
+    border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    align-items: center;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 10px 15px;
+}
+
+.search-box button {
+    border: none;
+    background: #936b9c;
+    padding: 10px 25px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+}
+
+/* ---------- FEATURE CARDS ---------- */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 3rem 0;
+}
+
+.feature-card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+/* ---------- FILTERS (CLEAN UI) ---------- */
+.carousel {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/* FILTER STYLE (small scale already applied + cleaner look) */
+.filter {
+    flex: 0 0 auto;
+    min-width: 90px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    background: white;
+    padding: 10px;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.filter:hover {
+    transform: translateY(-3px);
+    background: #c4abca;
+}
+
+.filter i {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* VIEW ALL SPECIAL BUTTON */
+
+/* ---------- GST CONTAINER ---------- */
+.tax-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* FULL BOX WRAP (FIX MAIN ISSUE) */
+.gst-box {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+
+    border: 1.5px solid #ffd1b3;
+    background: #fff;
+    padding: 8px 14px;
+    border-radius: 30px;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+/* Bootstrap override fix */
+.gst-box .form-check-input {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* label alignment fix */
+.gst-box .form-check-label {
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* ---------- DESKTOP ---------- */
+@media (min-width: 992px) {
+    .filters-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .tax-toggle {
+        margin-left: auto;
+    }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 991px) {
+    .filters-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tax-toggle {
+        margin-top: 12px;
+        justify-content: center;
+    }
+
+    .gst-box {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* ---------- CTA ---------- */
+.cta {
+    margin: 4rem auto;
+    padding: 3rem;
+    text-align: center;
+    border-radius: 20px;
+    background: #e2c1ea;
+}
+
+.card-listing {
+    border-radius: 18px;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    transition: 0.3s ease;
+    margin-right: 5px;
+}
+.card-body {
+    padding: 14px 16px !important;
+}
+.card-title {
+    margin-bottom: 6px;
+}
+/* hover lift + transparency effect */
+.card-listing:hover {
+    transform: translateY(-6px);
+}
+
+/* IMAGE WRAPPER */
+.img-wrapper {
+    position: relative;
+}
+
+/* image */
+.img-wrapper img {
+    height: 18rem;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* ---------- HOVER TRANSPARENT OVERLAY ---------- */
+.img-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.25);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.card-listing:hover .img-wrapper::after {
+    opacity: 1;
+}
+
+/* rating badge */
+.rating-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* location */
+.location {
+    font-size: 13px;
+    color: gray;
+    margin-bottom: 8px;
+}
+
+/* tags */
+.tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.tags span {
+    font-size: 11px;
+    background: #cbbbcf;
+    padding: 3px 8px;
+    border-radius: 20px;
+}
+
+/* price */
+.price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #5e4264;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* footer button */
+.view-btn {
+    display: block;
+    text-align: center;
+    background: #936b9c;
+    color: white;
+    padding: 8px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+    .img-wrapper img {
+        height: 14rem;
+    }
+
+    .price {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+</style>
+
+<!-- ---------- HERO ---------- -->
+<div class="hero">
+    <h1>Find Your Perfect <span>PG</span></h1>
+    <p>Discover comfortable and affordable accommodations with ease</p>
+
+    <!-- SEARCH (UI ONLY - NO BACKEND CHANGE) -->
+    <form action="/listings#listings" method="GET" class="search-box">
+    <input type="text" name="search" placeholder="Search by location, PG name..." />
+    <button type="submit">Search</button>
+</form>
+</div>
+
+<!-- ---------- FEATURE CARDS ---------- -->
+<div class="features">
+    <div class="feature-card">
+        <h5>Safe & Verified</h5>
+        <p>All PGs are verified</p>
+    </div>
+    <div class="feature-card">
+        <h5>Easy Booking</h5>
+        <p>Quick and simple process</p>
+    </div>
+    <div class="feature-card">
+        <h5>Best Prices</h5>
+        <p>Affordable stays</p>
+    </div>
+</div>
+
+
+<!-- ---------- FILTERS (NO ARROWS + END BUTTON) ---------- -->
+<div class="filters-wrapper">
+
+    <div id="filters" class="carousel">
+
+        <a href="/listings/category/trending" class="filter">
+            <i class="fa-solid fa-fire"></i>
+            <p>Popular</p>
+        </a>
+
+        <a href="/listings/category/rooms" class="filter">
+            <i class="fa-solid fa-person"></i>
+            <p>Girls PG</p>
+        </a>
+
+        <a href="/listings/category/cities" class="filter">
+            <i class="fa-solid fa-male"></i>
+            <p>Boys PG</p>
+        </a>
+
+        <a href="/listings/category/mountains" class="filter">
+            <i class="fa-solid fa-wind"></i>
+            <p>AC Rooms</p>
+        </a>
+
+        <a href="/listings/category/castles" class="filter">
+            <i class="fa-solid fa-users"></i>
+            <p>Shared</p>
+        </a>
+
+        <a href="/listings/category/pools" class="filter">
+            <i class="fa-solid fa-school"></i>
+            <p>Near College</p>
+        </a>
+
+        <a href="/listings/category/camping" class="filter">
+            <i class="fa-solid fa-coins"></i>
+            <p>Affordable</p>
+        </a>
+
+    </div>
+
+    <!-- GST TOGGLE (UNCHANGED FUNCTIONALITY) -->
+    <div class="tax-toggle">
+
+    <div class="gst-box form-check form-switch">
+
+        <input class="form-check-input" type="checkbox" id="switchCheckDefault">
+
+        <label class="form-check-label" for="switchCheckDefault">
+            Display Total After Taxes
+        </label>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- ---------- LISTINGS (UNCHANGED FUNCTIONALITY) ---------- -->
+<h2 id="listings" class="mt-5 mb-3">Trending PGs</h2>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% for(let listing of allListings){ %>
+    <div class="col">
+        <a href="/listings/<%= listing._id %>" style="text-decoration:none; color:black;">
+            <div class="card h-100 card-listing">
+
+    <!-- IMAGE WRAPPER -->
+    <div class="img-wrapper">
+        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing">
+
+        <!-- rating -->
+        <div class="rating-badge">
+            ⭐ 4.2
+        </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="card-body">
+
+        <h5 class="card-title"><%= listing.title %></h5>
+
+        <% if(listing.location){ %>
+            <p class="location">
+                <i class="fa-solid fa-location-dot"></i> <%= listing.location %>
+            </p>
+        <% } %>
+
+        <!-- tags -->
+        <div class="tags">
+            <span>WiFi</span>
+            <span>AC</span>
+            <span>Laundry</span>
+        </div>
+
+        <p class="price">
+            ₹ <%= listing.price.toLocaleString("en-IN") %>
+            <span class="tax-info">/month +18% GST</span>
+        </p>
+
+        <div class="card-footer-ui">
+            <a href="/listings/<%= listing._id %>" class="view-btn">
+                View Details
+            </a>
+        </div>
+
+    </div>
+</div>
+        </a>
+    </div>
+    <% } %>
+</div>
+
+<!-- ---------- CTA ---------- -->
+<div class="cta">
+    <h2>Have a PG to List?</h2>
+    <p>Join thousands of owners and reach more tenants</p>
+    <a href="/listings/new" class="btn btn-light mt-2">List Your PG</a>
+</div>
+
+<!-- ---------- SCRIPT (UNCHANGED LOGIC) ---------- -->
+<script>
+    const taxSwitch = document.getElementById("switchCheckDefault");
+
+    if(taxSwitch){
+        taxSwitch.addEventListener("click", ()=>{
+            const taxInfo = document.getElementsByClassName("tax-info");
+            for(let info of taxInfo){
+                info.style.display = info.style.display !== "inline" ? "inline" : "none";
+            }
+        });
+    }
+</script>

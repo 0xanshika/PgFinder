@@ -1,0 +1,179 @@
+<% layout("/layout/boilerplate") -%>
+
+<style>
+body {
+    background: #fff7ed;
+}
+
+/* ===== PAGE WRAPPER ===== */
+.edit-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+}
+
+/* ===== CARD ===== */
+.edit-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+/* ===== TITLE ===== */
+.page-title {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* ===== INPUTS ===== */
+.form-control,
+.form-select {
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid #eee;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: none;
+    border-color: #8c6fb1;
+}
+
+/* ===== IMAGE PREVIEW ===== */
+.preview-img {
+    width: 100%;
+    max-width: 350px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-top: 10px;
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary-custom {
+    background: #8c6fb1;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-secondary {
+    border-radius: 12px;
+}
+</style>
+
+<div class="edit-container">
+
+    <div class="page-title">Edit PG Listing</div>
+    <div class="subtitle">Update your PG details below</div>
+
+    <div class="edit-card">
+
+        <form method="post"
+              action="/listings/<%= Listing._id %>?_method=PUT"
+              enctype="multipart/form-data"
+              class="needs-validation"
+              novalidate>
+
+            <!-- TITLE -->
+            <div class="mb-3">
+                <label class="form-label">PG Title</label>
+                <input type="text"
+                       name="listing[title]"
+                       value="<%= Listing.title %>"
+                       class="form-control"
+                       required>
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="listing[description]"
+                          class="form-control"
+                          rows="3"
+                          required><%= Listing.description %></textarea>
+            </div>
+
+            <!-- PRICE + COUNTRY -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="number"
+                           name="listing[price]"
+                           value="<%= Listing.price %>"
+                           class="form-control"
+                           required>
+                </div>
+
+                <div class="col-md-8 mb-3">
+                    <label class="form-label">Country</label>
+                    <input type="text"
+                           name="listing[country]"
+                           value="<%= Listing.country %>"
+                           class="form-control"
+                           required>
+                </div>
+            </div>
+
+            <!-- LOCATION -->
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input type="text"
+                       name="listing[location]"
+                       value="<%= Listing.location %>"
+                       class="form-control"
+                       required>
+            </div>
+
+            <!-- CATEGORY -->
+            <div class="mb-3">
+                <label class="form-label">Category</label>
+                <select class="form-select" name="listing[category]" required>
+                    <option disabled>Choose category</option>
+
+                    <option value="trending" <%= Listing.category === "trending" ? "selected" : "" %>>Popular</option>
+                    <option value="rooms" <%= Listing.category === "rooms" ? "selected" : "" %>>Girls PG</option>
+                    <option value="cities" <%= Listing.category === "cities" ? "selected" : "" %>>Boys PG</option>
+                    <option value="mountains" <%= Listing.category === "mountains" ? "selected" : "" %>>AC Rooms</option>
+                    <option value="castles" <%= Listing.category === "castles" ? "selected" : "" %>>Shared</option>
+                    <option value="pools" <%= Listing.category === "pools" ? "selected" : "" %>>Near Colleges</option>
+                    <option value="camping" <%= Listing.category === "camping" ? "selected" : "" %>>Affordable</option>
+                    <option value="farms" <%= Listing.category === "farms" ? "selected" : "" %>>Single Room</option>
+                    <option value="arctic" <%= Listing.category === "arctic" ? "selected" : "" %>>Furnished</option>
+
+                </select>
+            </div>
+
+            <!-- CURRENT IMAGE -->
+            <div class="mb-3">
+                <label class="form-label">Current Image</label>
+                <img src="<%= orignalImageUrl %>" class="preview-img">
+            </div>
+
+            <!-- NEW IMAGE -->
+            <div class="mb-3">
+                <label class="form-label">Upload New Image</label>
+                <input type="file"
+                       name="image"
+                       class="form-control">
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/listings/<%= Listing._id %>" class="btn btn-secondary">Cancel</a>
+                <button class="btn-primary-custom">Update Listing</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

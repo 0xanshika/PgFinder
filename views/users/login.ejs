@@ -1,0 +1,147 @@
+<% layout("/layout/boilerplate") -%>
+
+<style>
+  body {
+    background: #fff7ed;
+  }
+
+  .login-wrapper {
+    display: flex;
+    min-height: 85vh;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .left-panel {
+    flex: 1;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #fff1e6, #ffe0cc);
+  }
+
+  .left-panel h1 {
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  .feature span {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: #fff;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .right-panel {
+    flex: 1;
+    max-width: 420px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  .form-control {
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+
+  .btn-login {
+    width: 100%;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    background: #936b9c;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .login-wrapper {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<div class="login-wrapper">
+
+  <!-- LEFT PANEL (UI ONLY) -->
+  <div class="left-panel">
+    <h1>Welcome Back!</h1>
+    <p>Login to access your account and continue.</p>
+
+    <div class="feature">
+      <span><i class="fa-solid fa-house"></i></span> Access your dashboard
+    </div>
+
+    <div class="feature">
+      <span><i class="fa-solid fa-lock"></i></span> Secure login system
+    </div>
+
+    <div class="feature">
+      <span><i class="fa-solid fa-bolt-lightning"></i></span> Fast and easy access
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL (FUNCTIONAL FORM - UNCHANGED LOGIC) -->
+  <div class="right-panel">
+    <div class="title">Login</div>
+    <div class="subtitle">Enter your credentials to access your account</div>
+
+    <form action="/login" method="POST" class="needs-validation" novalidate>
+      
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="username" 
+          name="username" 
+          required
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          type="password" 
+          class="form-control" 
+          id="password" 
+          name="password" 
+          required
+        >
+      </div>
+
+      <button type="submit" class="btn-login">Login</button>
+    </form>
+
+    <p class="mt-3 text-center" style="font-size: 14px;">
+      Don't have an account?
+      <a href="/signup">Sign Up</a>
+    </p>
+  </div>
+
+</div>

@@ -1,0 +1,209 @@
+<% layout("/layout/boilerplate") -%>
+
+<style>
+body {
+    background: #fff7ed;
+}
+
+/* ================= CONTAINER ================= */
+.form-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+}
+
+/* ================= CARD ================= */
+.form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+/* ================= TITLE ================= */
+.page-title {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* ================= INPUTS ================= */
+.form-control,
+.form-select,
+textarea {
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid #eee;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+    box-shadow: none;
+    border-color: #ffb88c;
+}
+
+/* ================= SECTION TITLE ================= */
+.section-title {
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* ================= AMENITIES ================= */
+.amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.amenity {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    cursor: pointer;
+    font-size: 14px;
+    background: #fff;
+    transition: 0.2s;
+}
+
+.amenity:hover {
+    background: #ffe0cc;
+}
+
+/* ================= IMAGE UPLOAD BOX ================= */
+.upload-box {
+    border: 2px dashed #ddd;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    border-color: #ffb88c;
+    background: #fff7ed;
+}
+
+/* ================= BUTTONS ================= */
+.btn-primary-custom {
+    background: #614f78;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-secondary {
+    border-radius: 12px;
+}
+</style>
+
+<div class="form-container">
+
+    <div class="page-title">Add New PG Listing</div>
+    <div class="subtitle">Fill in the details to list your PG</div>
+
+    <div class="form-card">
+
+        <form method="post"
+              action="/listings"
+              enctype="multipart/form-data"
+              class="needs-validation"
+              novalidate>
+
+            <!-- TITLE -->
+            <div class="mb-3">
+                <label class="form-label">PG Title *</label>
+                <input type="text"
+                       name="listing[title]"
+                       class="form-control"
+                       placeholder="e.g. Cozy PG near College with WiFi"
+                       required>
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="mb-3">
+                <label class="form-label">Description *</label>
+                <textarea name="listing[description]"
+                          class="form-control"
+                          rows="3"
+                          placeholder="Describe your PG, nearby facilities, rules, etc."
+                          required></textarea>
+            </div>
+
+            <!-- PRICE + CITY -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Monthly Rent (₹) *</label>
+                    <input type="number"
+                           name="listing[price]"
+                           class="form-control"
+                           placeholder="8000"
+                           required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Country *</label>
+                    <input type="text"
+                           name="listing[country]"
+                           class="form-control"
+                           placeholder="India"
+                           required>
+                </div>
+            </div>
+
+            <!-- LOCATION -->
+            <div class="mb-3">
+                <label class="form-label">Location / Area *</label>
+                <input type="text"
+                       name="listing[location]"
+                       class="form-control"
+                       placeholder="e.g. Karol Bagh, Delhi"
+                       required>
+            </div>
+
+            <!-- CATEGORY (UNCHANGED VALUES) -->
+            <div class="mb-3">
+                <label class="form-label">Category *</label>
+                <select class="form-select" name="listing[category]" required>
+                    <option value="">Select category</option>
+                    <option value="trending">Popular</option>
+                    <option value="rooms">Girls PG</option>
+                    <option value="cities">Boys PG</option>
+                    <option value="mountains">AC Rooms</option>
+                    <option value="castles">Shared</option>
+                    <option value="pools">Near Colleges</option>
+                    <option value="camping">Affordable</option>
+                    <option value="farms">Single Room</option>
+                    <option value="arctic">Furnished</option>
+                </select>
+            </div>
+
+            <!-- IMAGE UPLOAD -->
+            <div class="mb-4">
+                <label class="form-label">Upload Image</label>
+
+                <input type="file"
+                       name="listing[image]"
+                       class="form-control"
+                       required>
+            </div>
+
+            <!-- SUBMIT BUTTONS -->
+            <div class="d-flex justify-content-between">
+                <a href="/listings" class="btn btn-secondary">Cancel</a>
+                <button class="btn-primary-custom">Create Listing</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,71 @@
+body{
+    font-family: "Poppins", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex:1;
+}
+.navbar{
+ height: 5rem;
+}
+.fa-compass{
+    color: #77636a !important;
+    font-size: 2rem;
+}
+.nav-link{
+    color: #222 !important;
+}
+
+.f-info{
+    background-color: #ebebeb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.f-info-socials{
+    padding-bottom: 0.5rem;
+} 
+.f-info-links{
+    padding-top: 0.5rem;
+}
+.card-listing{
+    border: none !important; 
+    margin-bottom: 2rem;
+    border-radius: 2rem !important;
+}
+.card-img-top{
+   border-radius: 2rem !important; 
+}
+.card-body{
+    padding: 0 !important;
+}
+.see-details{
+    text-decoration: none;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+.add-button{
+    background-color: #fe424d !important;
+    color: white !important;
+    border: none !important;
+}
+.delete_btn{
+    background-color: black !important;
+    color: white !important;
+    border: none !important;
+}
+
+#map{
+    height: 20rem;
+    width: 40rem;
+}
+

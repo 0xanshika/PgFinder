@@ -1,0 +1,59 @@
+<% if(success && success.length > 0) { %>
+    <div class="alert alert-success alert-dismissible fade show flash-alert">
+        <%= success[0] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+<% if(error && error.length > 0) { %>
+    <div class="alert alert-danger alert-dismissible fade show flash-alert">
+        <%= error[0] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+<style>
+.flash-alert {
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 14px;
+    border: none;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    animation: slideDown 0.4s ease;
+}
+
+/* Success theme (PG Finder soft green) */
+.alert-success {
+    background: linear-gradient(90deg, #d4f8e8, #e8fff3);
+    color: #1f7a4d;
+}
+
+/* Error theme (soft red) */
+.alert-danger {
+    background: linear-gradient(90deg, #ffe1e1, #fff0f0);
+    color: #a12b2b;
+}
+
+/* Animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Close button fix */
+.btn-close {
+    opacity: 0.6;
+}
+.btn-close:hover {
+    opacity: 1;
+}
+</style>

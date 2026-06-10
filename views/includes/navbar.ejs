@@ -1,0 +1,82 @@
+<style>
+.navbar {
+  background: #ffffff !important;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+body {
+  padding-top: 80px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #8c6fb1;
+  text-decoration: none;
+}
+
+.navbar-brand i {
+  margin-right: 8px;
+  color: #8c6fb1;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #080000 !important;
+  margin: 0 5px;
+}
+
+.nav-link:hover {
+  color: #cbbae1 !important;
+}
+
+.navbar-collapse {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+}
+</style>
+
+<nav class="navbar navbar-expand-lg border-bottom">
+
+  <div class="container-fluid">
+
+    <!-- BRAND -->
+    <a class="navbar-brand" href="/listings">
+      PG Finder.
+    </a>
+
+    <!-- TOGGLER -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- MENU -->
+    <div class="collapse navbar-collapse text-center" id="navbarMenu">
+
+      <div class="navbar-nav ms-auto align-items-center">
+
+        <a class="nav-link" href="/listings#listings">Explore</a>
+        <a class="nav-link" href="/listings/new">List PG</a>
+
+        <% if (!currUser) { %>
+          <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+          <a class="nav-link" href="/login"><b>Login</b></a>
+        <% } %>
+
+        <% if (currUser) { %>
+          <a class="nav-link" href="/logout"><b>Logout</b></a>
+        <% } %>
+
+      </div>
+
+    </div>
+  </div>
+</nav>

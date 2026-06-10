@@ -1,0 +1,344 @@
+<% layout("/layout/boilerplate") -%>
+
+<style>
+body {
+    background: #fff7ed;
+}
+
+/* ================= HERO IMAGE ================= */
+.hero-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+/* ================= MAIN LAYOUT ================= */
+.show-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* ================= TOP SECTION ================= */
+.top-section {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* LEFT MAIN INFO */
+.main-card {
+    flex: 2;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+/* RIGHT OWNER CARD */
+.side-card {
+    flex: 1;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+/* TITLE */
+.title {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* BADGES */
+.badge {
+    background: #817186;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+/* PRICE */
+.price {
+    font-size: 22px;
+    font-weight: 700;
+    color: #4b394f;
+}
+
+/* SECTION BOX */
+.section {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+/* AMENITIES */
+.amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.amenity {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+/* BUTTONS */
+.btn-primary-custom {
+    background: #936b9c;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-danger {
+    background: #936b9c;
+    border-radius: 12px;
+}
+
+/* REVIEWS */
+.review-card {
+    background: white;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* MAP */
+#map {
+    width: 100%;
+    height: 350px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* mobile fix */
+@media (max-width: 768px) {
+    #map {
+        height: 250px;
+    }
+}
+</style>
+
+<div class="show-container">
+
+    <!-- BACK -->
+    <a href="/listings" style="text-decoration:none;">← Back</a>
+
+    <!-- HERO IMAGE -->
+    <img src="<%= Listing.image.url %>" class="hero-img mt-3">
+
+    <!-- TOP SECTION -->
+    <div class="top-section">
+
+        <!-- LEFT MAIN -->
+        <div class="main-card">
+
+            <div class="title"><%= Listing.title %></div>
+
+            <div class="mt-2">
+                <span class="badge"><%= Listing.location %></span>
+                <span class="badge"><%= Listing.country %></span>
+            </div>
+
+            <div class="price mt-3">
+                ₹ <%= Listing.price.toLocaleString("en-IN") %> / month
+            </div>
+
+            <hr>
+
+            <p><%= Listing.description %></p>
+
+            <hr>
+
+            <!-- AMENITIES (STATIC UI LIKE DESIGN) -->
+            <h5>Amenities</h5>
+            <div class="amenities">
+                <div class="amenity">✔ WiFi</div>
+                <div class="amenity">✔ AC</div>
+                <div class="amenity">✔ Meals</div>
+                <div class="amenity">✔ Laundry</div>
+            </div>
+
+            <hr>
+
+            <!-- EDIT / DELETE -->
+            <a href="/listings/<%= Listing._id %>/edit" class="btn-primary-custom">Edit</a>
+
+            <form method="POST"
+                  action="/listings/<%= Listing._id %>?_method=DELETE"
+                  style="display:inline;">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+
+        </div>
+
+        <!-- RIGHT OWNER CARD -->
+        <div class="side-card">
+
+            <h5>Contact Owner</h5>
+
+            <p><b><%= Listing.owner.username %></b></p>
+
+            <p><i class="fa-solid fa-phone"></i> +91-9876543211</p>
+
+            <button class="btn-primary-custom w-100" data-bs-toggle="modal" data-bs-target="#contactModal">
+                Contact Now
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- REVIEW SECTION -->
+<div class="section">
+
+    <h4>Leave a Review</h4>
+
+    <% if(currUser) { %>
+    <form method="POST" action="/listings/<%= Listing._id %>/reviews" class="needs-validation" novalidate>
+
+        <!-- ⭐ RATING (RESTORED EXACTLY) -->
+        <label class="form-label">Rating</label>
+
+        <fieldset class="starability-slot mb-3">
+
+            <input type="radio" id="no-rate" class="input-no-rate"
+                   name="review[rating]" value="1" checked />
+
+            <input type="radio" id="rate1" name="review[rating]" value="1" />
+            <label for="rate1" title="Terrible">1 star</label>
+
+            <input type="radio" id="rate2" name="review[rating]" value="2" />
+            <label for="rate2" title="Bad">2 stars</label>
+
+            <input type="radio" id="rate3" name="review[rating]" value="3" />
+            <label for="rate3" title="Okay">3 stars</label>
+
+            <input type="radio" id="rate4" name="review[rating]" value="4" />
+            <label for="rate4" title="Good">4 stars</label>
+
+            <input type="radio" id="rate5" name="review[rating]" value="5" />
+            <label for="rate5" title="Excellent">5 stars</label>
+
+        </fieldset>
+
+        <!-- COMMENT -->
+        <textarea class="form-control mb-2"
+                  name="review[comment]"
+                  placeholder="Write your review..."
+                  required></textarea>
+
+        <button class="btn-primary-custom">Submit</button>
+
+    </form>
+    <% } %>
+
+</div>
+
+    <!-- REVIEWS -->
+    <div class="section">
+
+        <h4>Reviews</h4>
+
+        <% if(Listing.reviews.length > 0) { %>
+
+        <% Listing.reviews.forEach(review => { %>
+
+            <div class="review-card mt-2">
+                <b>@<%= review.author.username %></b>
+                <p><%= review.comment %></p>
+
+                <form method="POST"
+                      action="/listings/<%= Listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
+
+        <% }) %>
+
+        <% } else { %>
+            <p>No reviews yet.</p>
+        <% } %>
+
+    </div>
+
+    <!-- MAP -->
+    <div class="section">
+        <h4>Where you will stay</h4>
+
+        <div style="width:100%; overflow:hidden;">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- CONTACT OWNER MODAL -->
+    <div class="modal fade" id="contactModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 16px;">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Contact Owner</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <p><b>Owner:</b> <%= Listing.owner.username %></p>
+
+                <p><b>Phone:</b> +91-9876543211</p>
+
+                <hr>
+
+                <form>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Your Name">
+                </div>
+
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Your Email">
+                </div>
+
+                <div class="mb-3">
+                    <textarea class="form-control" placeholder="Message to owner"></textarea>
+                </div>
+
+                <button class="btn-primary-custom w-100">
+                    Send Message
+                </button>
+                </form>
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MAP SCRIPT (UNCHANGED LOGIC) -->
+<script>
+const mapToken = "<%= process.env.MAP_TOKEN %>";
+maptilersdk.config.apiKey = mapToken;
+
+const listingCoordinates = <%= JSON.stringify(Listing.geometry.coordinates) %>;
+
+const map = new maptilersdk.Map({
+    container: 'map',
+    style: maptilersdk.MapStyle.STREETS,
+    center: listingCoordinates,
+    zoom: 10
+});
+
+new maptilersdk.Marker()
+.setLngLat(listingCoordinates)
+.addTo(map);
+</script>

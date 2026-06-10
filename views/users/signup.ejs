@@ -1,0 +1,157 @@
+<% layout("/layout/boilerplate") -%>
+
+<style>
+  body {
+    background: #fff7ed;
+  }
+
+  .signup-wrapper {
+    display: flex;
+    min-height: 90vh;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  /* LEFT FORM CARD */
+  .form-card {
+    flex: 1;
+    max-width: 480px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .form-control {
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+
+  .btn-signup {
+    width: 100%;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    background: #936b9c;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* RIGHT INFO PANEL */
+  .info-card {
+    flex: 1;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #fff1e6, #ffe0cc);
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  .feature span {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .signup-wrapper {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<div class="signup-wrapper">
+
+  <!-- SIGNUP FORM (FUNCTIONAL - UNCHANGED BACKEND) -->
+  <div class="form-card">
+    <div class="title">Create Account</div>
+    <div class="subtitle">Join us to find your perfect PG</div>
+
+    <form action="/signup" method="POST" class="needs-validation" novalidate>
+
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="username" 
+          name="username" 
+          required
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input 
+          type="email" 
+          class="form-control" 
+          id="email" 
+          name="email" 
+          required
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          type="password" 
+          class="form-control" 
+          id="password" 
+          name="password" 
+          required
+        >
+      </div>
+
+      <button type="submit" class="btn-signup">Create Account</button>
+    </form>
+
+    <p class="mt-3 text-center" style="font-size: 14px;">
+      Already have an account?
+      <a href="/login">Login</a>
+    </p>
+  </div>
+
+  <!-- INFO PANEL (LIKE YOUR DESIGN IMAGE) -->
+  <div class="info-card">
+    <h2>Join Our Community!</h2>
+    <p style="color:#666;">
+      Create an account to unlock amazing features and find your perfect accommodation.
+    </p>
+
+    <div class="feature">
+      <span><i class="fa-solid fa-magnifying-glass"></i></span> Search thousands of PGs
+    </div>
+
+    <div class="feature">
+      <span><i class="fa-solid fa-star"></i></span> Write and read reviews
+    </div>
+
+    <div class="feature">
+      <span><i class="fa-solid fa-house"></i></span> List your PG (for owners)
+    </div> 
+  </div>
+
+</div>
