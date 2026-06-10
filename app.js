@@ -21,6 +21,7 @@ const passport = require("passport");
 const LocalStartegy = require("passport-local");
 const User = require("./models/user.js");
 const dbUrl = process.env.ATLASDB_URL;
+const PORT = process.env.PORT || 3000;
 
 
 
@@ -92,20 +93,10 @@ app.use((req, res, next)=>{
     next();
 });
 
-// app.get("/demouser", async(req,res)=>{
-//     let fakeUser = new User({
-//         email: "student@gamil.com",
-//         username: "delta-student",
-//     });
-//     let registeredUser = await User.register(fakeUser, "helloworld");
-//     res.send(registeredUser);
-// })
 
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/", userRouter);
-
-
 
 
 // for all errors genrated except route errors
@@ -119,6 +110,7 @@ app.use((err, req, res, next)=>{
     res.status(statusCode).render("error.ejs",{message});
 });
 
-app.listen(3000 , ()=>{
-    console.log("app is listening to port");
-})
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
